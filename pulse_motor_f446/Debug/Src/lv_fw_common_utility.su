@@ -1,3 +1,0 @@
-lv_fw_common_utility.c:19:10:lv_fw_common_get_ustick	16	static
-lv_fw_common_utility.c:36:26:lv_fw_common_sync_fps	24	static
-lv_fw_common_utility.c:59:6:lv_fw_common_udelay	16	static

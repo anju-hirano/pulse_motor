@@ -110,18 +110,18 @@ int main(void)
 
 #ifdef BIPOL1
 #undef UNI_POL
-#define PULSE_CNT      400  // 256=45度、300=54度、512=90度、768=135度、1024=180度
-#define DELTA_FPS      10
+#define PULSE_CNT      315  // 315=180度
+#define DELTA_FPS      5
 #define MIN_FPS        500
-#define MAX_FPS        1000
+#define MAX_FPS        1200
 #endif
 
 #ifdef BIPOL2
 #undef UNI_POL
-#define PULSE_CNT      600  // 256=45度、300=54度、512=90度、768=135度、1024=180度
-#define DELTA_FPS      20
-#define MIN_FPS        1000
-#define MAX_FPS        2000
+#define PULSE_CNT      500  // 500=180度
+#define DELTA_FPS      5
+#define MIN_FPS        500
+#define MAX_FPS        1200
 #endif
   #define MAX_FPS_OFFSET (MAX_FPS-MIN_FPS)
   uint32_t counter = 0;
