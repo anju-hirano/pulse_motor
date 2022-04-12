@@ -70,10 +70,6 @@ void Error_Handler(void);
 #define D12_GPIO_Port GPIOA
 #define D11_Pin GPIO_PIN_7
 #define D11_GPIO_Port GPIOA
-#define MTR_B_IA_Pin GPIO_PIN_8
-#define MTR_B_IA_GPIO_Port GPIOC
-#define MTR_B_IB_Pin GPIO_PIN_9
-#define MTR_B_IB_GPIO_Port GPIOC
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
@@ -82,10 +78,6 @@ void Error_Handler(void);
 #define SWO_GPIO_Port GPIOB
 #define D10_Pin GPIO_PIN_6
 #define D10_GPIO_Port GPIOB
-#define MTR_A_IA_Pin GPIO_PIN_8
-#define MTR_A_IA_GPIO_Port GPIOB
-#define MTR_A_IB_Pin GPIO_PIN_9
-#define MTR_A_IB_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
