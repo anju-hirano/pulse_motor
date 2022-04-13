@@ -98,7 +98,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
-#define DUTY 20
+#define DUTY 40
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -140,9 +140,9 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET) {
-      lv_fw_common_sync_fps(MIN_FPS);
-    } else {
       lv_fw_common_sync_fps(MIN_FPS + fps_offset);
+    } else {
+      lv_fw_common_sync_fps(MIN_FPS);
     }
 //    HAL_Delay(1);  // 1で2ms=500Hz, 2で3ms=333Hz 周期
 
