@@ -180,7 +180,7 @@ int main(void)
         HAL_GPIO_WritePin(D13_GPIO_Port, D13_Pin, GPIO_PIN_SET);
         break;
     }
-#elif 1 // Bi-Poler Stepping Motor with PWM
+#elif 0 // Bi-Poler Stepping Motor with PWM
     switch ((up_down * 4) + (phase & 0x03)) {
       case 0:
       case 7:
@@ -211,37 +211,29 @@ int main(void)
         __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, DUTY);
         break;
     }
-#else // Bi-Poler Stepping Motor
+#else // RC Servo PWM 20ms 1500us+-500us
+    uint16_t us=1500;
     switch ((up_down * 4) + (phase & 0x03)) {
       case 0:
-      case 7:
-        HAL_GPIO_WritePin(MTR_A_IA_GPIO_Port, MTR_A_IA_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MTR_A_IB_GPIO_Port, MTR_A_IB_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MTR_B_IA_GPIO_Port, MTR_B_IA_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MTR_B_IB_GPIO_Port, MTR_B_IB_Pin, GPIO_PIN_RESET);
-        break;
       case 1:
-      case 6:
-        HAL_GPIO_WritePin(MTR_A_IA_GPIO_Port, MTR_A_IA_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MTR_A_IB_GPIO_Port, MTR_A_IB_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MTR_B_IA_GPIO_Port, MTR_B_IA_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MTR_B_IB_GPIO_Port, MTR_B_IB_Pin, GPIO_PIN_RESET);
-        break;
       case 2:
-      case 5:
-        HAL_GPIO_WritePin(MTR_A_IA_GPIO_Port, MTR_A_IA_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MTR_A_IB_GPIO_Port, MTR_A_IB_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MTR_B_IA_GPIO_Port, MTR_B_IA_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MTR_B_IB_GPIO_Port, MTR_B_IB_Pin, GPIO_PIN_SET);
-        break;
       case 3:
+        us=1000;
+        break;
       case 4:
-        HAL_GPIO_WritePin(MTR_A_IA_GPIO_Port, MTR_A_IA_Pin, GPIO_PIN_SET);
-        HAL_GPIO_WritePin(MTR_A_IB_GPIO_Port, MTR_A_IB_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MTR_B_IA_GPIO_Port, MTR_B_IA_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MTR_B_IB_GPIO_Port, MTR_B_IB_Pin, GPIO_PIN_SET);
+      case 5:
+      case 6:
+      case 7:
+        us=2000;
         break;
     }
+    if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET) {
+      us=1500;
+    }
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, us);
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, us);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, us);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, us);
 #endif
     if(phase >= PULSE_CNT/2) {
       phase = PULSE_CNT - phase - 1;    // 残パルス数
